@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="freecodecamp" content="Lmao">
+        <title>ARASKA_INTERFACE</title>
+    </head>
+    <body>
+        <style>
+            html {
+                background: url("ARASKA.png"); background-size:100%; 
+            }
+            p {
+                font-size: x-large;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-align: center;
+            }
+            
+        </style>
+        <header>
+            
+        </header>
+        <main>
+             <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+             
+             <script>
+                function SearchQuery(val) {
+                  document.getElementById("searchButton").href = "https://duckduckgo.com/?q=" + val;
+                }
+              
+                function buttonClick() {
+                  document.getElementById("searchBox").value = "";
+                }
+              </script>
+              
+              <div align="center" width="1000p">
+                <section>
+                <input id="searchBox" type="text" name="searchBox" value="" onchange="SearchQuery(this.value)">
+                <a id="searchButton" href="https://www.google.com/" target="_blank" onclick="buttonClick()">🔎</p>
+                <section>
+              </div>
+              
+               
+        </main>
+        <footer>
+
+        </footer>
+    </body>
