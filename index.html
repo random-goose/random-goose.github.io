@@ -1,26 +1,465 @@
-<html>
-    <head>
-        <title>ARASKA_INTERFACE</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-        <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruthwik Alamuru - Computer Science</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Latin+Modern+Roman:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
+        :root {
+            --body-color: hsl(0, 5%, 10%);
+            --body-bg-color: hsl(210, 20%, 98%);
+            --link-color: hsl(0, 100%, 33%);
+            --link-visited: hsl(0, 100%, 33%);
+            --border-color: hsl(0, 0%, 39%);
+            --table-border-color: black;
+            --border-width-thin: 1px;
+            --border-width-thick: 2px;
+        }
 
-            <div class="container">
-                <form action="https://duckduckgo.com/?q=" method="get" class="search-bar">
-                    <input type="text" placeholder="index database" name="q">
-                    <button type="sumbit"><img src="https://i.imgur.com/vT8tUXd.png"></button>
-                </form>
-                <script>
-                    function handle(e){
-                        if(e.key === "Enter"){
-                            alert("Enter was just pressed.");
-                        }
-                
-                        return false;
-                    }
-                </script>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --body-color: hsl(0, 0%, 86%);
+                --body-bg-color: hsl(0, 0%, 16%);
+                --link-color: hsl(196, 80%, 77%);
+                --link-visited: hsl(196, 80%, 77%);
+                --border-color: hsl(0, 0%, 59%);
+                --table-border-color: white;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Latin Modern Roman', Georgia, Cambria, 'Times New Roman', Times, serif;
+            line-height: 1.8;
+            max-width: 80ch;
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 2rem 1.25rem;
+            color: var(--body-color);
+            background-color: var(--body-bg-color);
+            text-rendering: optimizeLegibility;
+            hyphens: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, dl, dd {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 3.25rem;
+            margin-bottom: 1.625rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            line-height: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            line-height: 1.625rem;
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            line-height: 1.625rem;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            margin-top: 1rem;
+        }
+
+        .author {
+            margin: 0.85rem 0;
+            font-variant-caps: small-caps;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .affiliation {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .contact {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 0.95em;
+        }
+
+        .contact a {
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        a, a:visited {
+            color: var(--link-visited);
+            text-decoration-skip-ink: auto;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            padding-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        li {
+            margin-top: 0.5rem;
+        }
+
+        .research-interests {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .research-interests li {
+            margin: 0;
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 0.9em;
+        }
+
+        .publication {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .publication:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-authors {
+            margin-bottom: 0.25rem;
+            font-style: italic;
+        }
+
+        .pub-venue {
+            margin-bottom: 0.5rem;
+            font-variant-caps: small-caps;
+        }
+
+        .pub-links a {
+            margin-right: 1rem;
+            font-size: 0.9em;
+            text-decoration: none;
+            border-bottom: 1px solid var(--link-color);
+        }
+
+        .pub-links a:hover {
+            border-bottom: 2px solid var(--link-color);
+        }
+
+        .course-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .course-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .course-code {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .news-item {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .news-date {
+            font-weight: bold;
+            font-variant-caps: small-caps;
+            color: var(--border-color);
+        }
+
+        .news-content {
+            margin-top: 0.25rem;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            margin: 1rem 0;
+            border-top: var(--border-width-thick) solid var(--table-border-color);
+            border-bottom: var(--border-width-thick) solid var(--table-border-color);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.5rem;
+            line-height: 1.1;
+        }
+
+        th {
+            border-bottom: var(--border-width-thin) solid var(--table-border-color);
+            font-weight: bold;
+        }
+
+        .abstract {
+            margin: 2.25rem 0;
+            text-align: center;
+        }
+
+        .abstract h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        .section {
+            margin-top: 3rem;
+        }
+
+        blockquote {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            border-left: 3px solid var(--border-color);
+            font-style: italic;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        .emphasize {
+            font-weight: bold;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .contact {
+                font-size: 0.9em;
+            }
+            
+            .contact a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            .research-interests {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ruthwik Alamuru</h1>
+        <p class="author">Undergraduate Student</p>
+        <p class="affiliation">Department of Computer Science and Business System<br>B V Raju Institute of Technology, Narsapur, India</p>
+        <div class="contact">
+            <a href="mailto:ruthwik@duck.com">ruthwik@duck.com</a>
+            <a href="tel:+917569097948">+91 75690 97948</a>
+            <a href="https://linkedin.com/in/ruthwik-alamuru">LinkedIn</a>
+            <a href="cv.pdf">CV</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <h2>About</h2>
+            <p>I am a fourth-year undergraduate student studying Computer Science and Business System at B V Raju Institute of Technology. I am currently working as a Research Apprentice at the International Institute of Information Technology (IIIT), Hyderabad, under the supervision of Prof. Ponnurangam "PK" Kumaraguru at the Precog Lab. My research interests lie at the intersection of Artificial Intelligence and Systems Engineering, with a particular focus on Responsible and Safe AI, Large Language Models, and Meta Research.</p>
+            
+            <p>Prior to my current internship, I have worked as a Cloud Services Architect, designing secure and scalable AWS cloud architectures and reducing infrastructure costs significantly. I am passionate about bringing positive change to the world through technology and aim to pursue graduate studies in Computer Science with a focus on AI research upon completing my bachelor's degree.</p>
+        </section>
+
+        <section class="section">
+            <h2>Research Interests</h2>
+            <ul class="research-interests">
+                <li>Artificial Intelligence</li>
+                <li>Responsible and Safe AI</li>
+                <li>Large Language Models</li>
+                <li>Systems Engineering</li>
+                <li>Meta Research</li>
+                <li>Deep Learning</li>
+                <li>Natural Language Processing</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>News</h2>
+            <div class="news-item">
+                <div class="news-date">August 2024</div>
+                <div class="news-content">Started research apprenticeship at IIIT Hyderabad working on Responsible and Safe AI, Large Language Models & Agents, Small Language Models, and Meta Research.</div>
             </div>
+            <div class="news-item">
+                <div class="news-date">March 2024</div>
+                <div class="news-content">Won 3rd Prize at BVRIT R&D Showcase 2024 for AI Enabled E-forum project.</div>
+            </div>
+            <div class="news-item">
+                <div class="news-date">January 2024</div>
+                <div class="news-content">Completed freelance role as Cloud Services Architect, successfully migrating infrastructure to cloud and reducing costs by 28%.</div>
+            </div>
+            <div class="news-item">
+                <div class="news-date">2024</div>
+                <div class="news-content">Attended ACM India Summer School at IIT Madras and Entrepreneurship Workshop at BVR SCIENT, IIT Hyderabad.</div>
+            </div>
+        </section>
 
-        </body>
+<!--         <section class="section">
+            <h2>Publications</h2>
+            
+            <div class="publication">
+                <div class="pub-title">Research on Responsible and Safe AI and Large Language Models</div>
+                <div class="pub-authors"><span class="emphasize">Ruthwik Alamuru</span>, Prof. Ponnurangam "PK" Kumaraguru</div>
+                <div class="pub-venue">IIIT Hyderabad Precog Lab - In Progress</div>
+                <div class="pub-links">
+                    <a href="#">Research Details</a>
+                </div>
+            </div>
+        </section> -->
 
+        <section class="section">
+            <h2>Projects</h2>
+            
+            <h4>AI Pronunciation Coach</h4>
+            <p>Received Honorable Mention at MGIT HackSavvy. Developed using Python, Next.js, and advanced AI technologies including Generative AI, Large Language Models, Deep Learning, Speech Synthesis, and Analog Data Processing to create an intelligent pronunciation coaching system.</p>
+            
+            <h4>AI Enabled E-forum</h4>
+            <p>Won Third Prize at BVRIT R&D Showcase 2024. Built using HTML, CSS, Node.js, and integrated Generative AI, Large Language Models, Natural Language Processing, and Speech Synthesis to create an intelligent forum platform for enhanced user interaction.</p>
+            
+            <h4>Dream Analyzer</h4>
+            <p>Developed during VNR Krithoathon using Python and Streamlit. Utilized Large Language Models, Deep Learning, and Data Science techniques to analyze and interpret dream patterns, providing users with meaningful insights into their subconscious experiences.</p>
+
+            <h4>Encrypted Baking System</h4>
+            <p>A Semester III project focused on Network and Information Security. Implemented in C++ to demonstrate secure transaction processing and data protection in financial systems.</p>
+
+            <h4>GUI Blackjack</h4>
+            <p>A Semester IV project showcasing UI/UX Design skills. Developed in Java with Applet to create an interactive card game with an intuitive graphical interface.</p>
+        </section>
+
+        <section class="section">
+            <h2>Education</h2>
+            
+            <h4>B.Tech in Computer Science and Business System, B V Raju Institute of Technology</h4>
+            <p><em>Expected 2026</em><br>
+            CGPA: 8.06/10.0<br>
+            Location: Narsapur, Telangana, India</p>
+
+            <h4>Senior Secondary, FIITJEE Junior College</h4>
+            <p><em>2020 - 2022</em><br>
+            Percentage: 87%<br>
+            Location: Hyderabad, Telangana, India</p>
+
+            <h4>Secondary School, FIITJEE World School</h4>
+            <p><em>2019 - 2020</em><br>
+            Percentage: 100%<br>
+            Location: Hyderabad, Telangana, India</p>
+        </section>
+
+        <section class="section">
+            <h2>Experience</h2>
+            
+            <h4>Research Apprentice, IIIT Hyderabad</h4>
+            <p><em>August 2024 – Present</em><br>
+            Working under Prof. Ponnurangam "PK" Kumaraguru at the Precog Lab on projects concerning Responsible and Safe AI, Large Language Models & Agents, Small Language Models, and Meta Research.</p>
+            
+            <h4>Cloud Services Architect, Freelance</h4>
+            <p><em>October 2022 – January 2024</em><br>
+            Designed secure, scalable AWS cloud architectures. Migrated infrastructure to cloud, reducing costs by 28%. Implemented multi-cloud/hybrid solutions using Docker, Kubernetes, and serverless technologies.</p>
+        </section>
+
+        <section class="section">
+            <h2>Leadership & Activities</h2>
+            
+            <h4>Founder and Head - Year Zero Student Club</h4>
+            <p>Founded and led a student organization focused on innovation and technology advancement within the college community.</p>
+            
+            <h4>Workshop Participation</h4>
+            <ul>
+                <li>Attendee of ACM India Summer School, IIT Madras (2024)</li>
+                <li>Attendee of Entrepreneurship Workshop at BVR SCIENT, IIT Hyderabad</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Awards and Honors</h2>
+            <ul>
+                <li>3rd Prize at BVRIT R&D Showcase 2024 - AI Enabled E-forum</li>
+                <li>Honorable Mention at MGIT HackSavvy - AI Pronunciation Coach</li>
+                <li>Founder and Head - Year Zero Student Club</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Skills & Languages</h2>
+            
+            <h4>Programming Languages</h4>
+            <p>Python, JavaScript, Java, C++, HTML/CSS</p>
+            
+            <h4>Technologies & Frameworks</h4>
+            <p>Next.js, Node.js, Streamlit, AWS, Docker, Kubernetes, Generative AI, Large Language Models, Deep Learning, Natural Language Processing, Speech Synthesis</p>
+            
+            <h4>Languages</h4>
+            <ul>
+                <li>English - Full Professional Fluency</li>
+                <li>Hindi - Full Professional Fluency</li>
+                <li>Telugu - Native</li>
+                <li>German - Beginner</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Interests</h2>
+            <p>Bass Guitar, Music Composition, Literature, Motorcycling, Lawn Tennis</p>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p style="text-align: center; font-size: 0.9em; color: var(--border-color);">
+            Last updated: June 2025
+        </p>
+    </footer>
+</body>
 </html>
