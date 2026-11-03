@@ -4,13 +4,322 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruthwik Alamuru - Predoctoral Fellow, IIT Roorkee</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --body-color: hsl(0, 5%, 10%);
+            --body-bg-color: hsl(210, 20%, 98%);
+            --link-color: hsl(0, 100%, 33%);
+            --link-visited: hsl(0, 100%, 33%);
+            --border-color: hsl(0, 0%, 39%);
+            --table-border-color: black;
+            --border-width-thin: 1px;
+            --border-width-thick: 2px;
+            --column-gap: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            max-width: 75vw;
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 2rem 1.25rem;
+            color: var(--body-color);
+            background-color: var(--body-bg-color);
+            text-rendering: optimizeLegibility;
+            hyphens: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, dl, dd {
+            margin: 0;
+        }
+
+        /* Header - spans full width */
+        header {
+            width: 100%;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            line-height: 2.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .author {
+            margin: 0.5rem 0;
+            font-variant-caps: small-caps;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .affiliation {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.95em;
+        }
+
+        .contact {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 0.9em;
+        }
+
+        .contact a {
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content - two column layout */
+        main {
+            column-count: 2;
+            column-gap: var(--column-gap);
+            column-fill: balance;
+            text-align: justify;
+        }
+
+        /* Sections that should span full width */
+        .full-width {
+            column-span: all;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section {
+            break-inside: avoid-column;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            line-height: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+            break-after: avoid;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            line-height: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.6rem;
+            break-after: avoid;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            line-height: 1.3rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            break-after: avoid;
+        }
+
+        p {
+            margin-top: 0.8rem;
+            text-indent: 0;
+        }
+
+        /* First paragraph after heading shouldn't be indented */
+        h2 + p, h3 + p, h4 + p {
+            margin-top: 0;
+        }
+
+        a, a:visited {
+            color: var(--link-visited);
+            text-decoration-skip-ink: auto;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        li {
+            margin-top: 0.3rem;
+        }
+
+        .research-interests {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .research-interests li {
+            margin: 0;
+            padding: 0.2rem 0.6rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 0.85em;
+        }
+
+        .news-item {
+            margin-bottom: 1rem;
+            break-inside: avoid;
+        }
+
+        .news-date {
+            font-weight: bold;
+            font-variant-caps: small-caps;
+            color: var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .news-content {
+            margin-top: 0.25rem;
+            font-size: 0.95em;
+        }
+
+        .emphasize {
+            font-weight: bold;
+        }
+
+        /* Publications */
+        .publication {
+            margin-top: 0.8rem;
+            padding-left: 0.9rem;
+            border-left: 2px solid var(--link-color);
+            break-inside: avoid;
+        }
+
+        .publication:first-of-type {
+            margin-top: 0;
+        }
+
+        .pub-title {
+            font-weight: bold;
+        }
+
+        .pub-type {
+            font-variant-caps: small-caps;
+            color: var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .pub-meta {
+            margin-top: 0.2rem;
+            font-size: 0.95em;
+        }
+
+        /* Abstract styling */
+        .abstract {
+            column-span: all;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .abstract h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            margin-top: 0;
+            text-align: center;
+            font-variant-caps: small-caps;
+        }
+
+        .abstract p {
+            font-size: 0.95em;
+            margin-top: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            column-span: all;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .updated {
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--border-color);
+        }
+
+        /* Prevent awkward breaks */
+        h2, h3, h4 {
+            break-inside: avoid;
+        }
+
+        .news-item, .section > div, .section > p {
+            break-inside: avoid;
+        }
+
+        /* Mobile responsiveness - single column on small screens */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                max-width: 100%;
+            }
+
+            main {
+                column-count: 1;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                line-height: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .contact {
+                font-size: 0.85em;
+            }
+
+            .contact a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .research-interests {
+                flex-direction: column;
+            }
+        }
+
+        /* Print styles for academic paper feel */
+        @media print {
+            body {
+                max-width: none;
+                margin: 0;
+                padding: 1in;
+            }
+
+            main {
+                column-count: 2;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Ruthwik Alamuru</h1>
         <p class="author">Predoctoral Fellow</p>
-        <p class="affiliation">Department of Management Studies<br>Indian Institute of Technology Roorkee, India</p>
+        <p class="affiliation">Indian Institute of Technology Roorkee, India</p>
         <div class="contact">
             <a href="mailto:ruthwik@duck.com">ruthwik@duck.com</a>
             <a href="https://linkedin.com/in/ruthwik-alamuru">LinkedIn</a>
@@ -21,7 +330,7 @@
     <main>
         <section class="abstract">
             <h2>Abstract</h2>
-            <p>I am a Predoctoral Fellow in the Department of Management Studies at the Indian Institute of Technology (IIT) Roorkee, working under the supervision of Prof. Vinay Sharma as the technical computer science contributor on interdisciplinary research projects. I completed my B.Tech in Computer Science and Business Systems at B V Raju Institute of Technology in 2026. My research interests lie at the intersection of Artificial Intelligence and Systems Engineering, with a particular focus on Responsible and Safe AI, Large Language Models, Retrieval-Augmented Generation, and Meta Research.</p>
+            <p>I am a Predoctoral Fellow at the Indian Institute of Technology (IIT) Roorkee, where I research full-time under Prof. Vinay Sharma. Our work brings AI methods to problems in management. I completed my B.Tech in Computer Science and Business Systems at B V Raju Institute of Technology in 2026. My research interests lie at the intersection of Artificial Intelligence and Systems Engineering, with a particular focus on Responsible and Safe AI, Large Language Models, Retrieval-Augmented Generation, and Meta Research.</p>
 
             <p>Before joining IIT Roorkee, I worked as a Research Apprentice at the Precog Lab, IIIT Hyderabad, under Prof. Ponnurangam "PK" Kumaraguru, and earlier as a Cloud Services Architect designing secure and scalable AWS architectures. I am passionate about bringing positive change to the world through technology and aim to pursue graduate studies in Computer Science with a focus on AI research.</p>
         </section>
@@ -42,9 +351,16 @@
 
         <section class="section">
             <h2>Current Work</h2>
-            <p>I am a Predoctoral Fellow at IIT Roorkee (July 2026 &ndash; June 2027), supported under the NPTEL Predoc scheme and supervised by Prof. Vinay Sharma of the Department of Management Studies. I contribute the technical computer science side of interdisciplinary projects that bring AI methods to questions in management and beyond.</p>
+            <p>I am a Predoctoral Fellow at IIT Roorkee (July 2026 &ndash; June 2027), supported under the NPTEL Predoc scheme and supervised by Prof. Vinay Sharma of the Department of Management Studies. My research here applies AI to questions in management, in collaboration with Prof. Sharma.</p>
 
-            <p>Alongside this, I am developing Pariprashna, a retrieval-augmented system for Indian scriptures with character-based conversational interfaces, which is the subject of my conference paper.</p>
+            <h4>Science of Science</h4>
+            <p>Developing computational approaches to surface promising but under-explored connections between research fields, drawing on scientometrics and scholarly knowledge graphs.</p>
+
+            <h4>AI Safety in Medicine</h4>
+            <p>Studying how the safety and reliability of language models in clinical settings relate to model scale and design.</p>
+
+            <h4>AI and the Future of Work</h4>
+            <p>Examining how exposed managerial and professional roles are to AI capabilities, and what role accountability plays in that exposure.</p>
         </section>
 
         <section class="section">
@@ -53,7 +369,7 @@
             <div class="publication">
                 <div class="pub-type">Conference Paper</div>
                 <div class="pub-title">Pariprashna</div>
-                <p class="pub-meta">A retrieval-augmented generation pipeline for Indian scriptures with character-based interfaces, combining embedding-based retrieval with cross-encoder reranking to recover semantic nuance. Abstract submitted; full paper in preparation.</p>
+                <p class="pub-meta">A retrieval-augmented generation pipeline for Indian scriptures with character-based interfaces, combining embedding-based retrieval with cross-encoder reranking to recover semantic nuance.</p>
                 <!-- When the venue / status is confirmed, add it here, e.g.:
                 <p class="pub-meta"><em>Venue name, 2026/2027</em> &middot; <a href="LINK">Paper</a></p> -->
             </div>
@@ -119,8 +435,8 @@
             <h2>Experience</h2>
 
             <h4>Predoctoral Fellow</h4>
-            <p><em>IIT Roorkee, Department of Management Studies, July 2026 &ndash; Present</em><br>
-            Working under Prof. Vinay Sharma as the technical computer science contributor on interdisciplinary research projects, under the NPTEL Predoc scheme (July 2026 &ndash; June 2027).</p>
+            <p><em>IIT Roorkee, July 2026 &ndash; Present</em><br>
+            Full-time research position under Prof. Vinay Sharma, applying AI to management research, under the NPTEL Predoc scheme (July 2026 &ndash; June 2027).</p>
 
             <h4>Research Apprentice</h4>
             <p><em>IIIT Hyderabad, August 2024 &ndash; 2026</em><br>
